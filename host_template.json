@@ -1,0 +1,24 @@
+{
+  "jsonrpc": "2.0",
+  "method": "host.create",
+  "params": {
+    "host": "{{ HOSTNAME }}",
+    "interfaces": [
+      {
+        "type": "1",
+        "main": "1",
+        "useip": "1",
+        "ip": "{{ IP_ADDRESS }}",
+        "dns": "",
+        "port": "161"
+      }
+    ],
+    "groups": [
+      {
+        "groupid": "19"
+      }
+    ]
+  },
+  "auth": "{{ AUTH }}",
+  "id": 1
+}
