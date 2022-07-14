@@ -13,21 +13,4 @@ TOKEN=$(curl -s -d '{
   "auth": null
 }' -H "Content-Type: application/json-rpc" ${ZabbixWeb}api_jsonrpc.php | gawk -F'"' '{print $8}')
 
-REQEST=$(cat << EOS
-  {
-    "jsonrpc": "2.0",
-    "method": "host.get",
-    "params": {
-      "filter": {
-        "host": [
-          "Zabbix server"
-        ]
-      }
-    },
-    "auth": "$TOKEN",
-    "id": 1
-  }
-EOS
-)
 echo ${TOKEN}
-#curl -s -d "$REQEST" -H "Content-Type: application/json-rpc" ${ZabbixWeb}api_jsonrpc.php | jq

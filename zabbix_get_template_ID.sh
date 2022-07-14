@@ -1,6 +1,8 @@
+#!/bin/bash
+
 ZabbixWeb=http://zabbix05/
 AUTH=`./zabbix_get_token.sh`
-REQUEST=$(cat << EOF
+REQUEST=$(cat << EOS
 {
   "jsonrpc": "2.0",
   "method": "template.get",
@@ -15,7 +17,7 @@ REQUEST=$(cat << EOF
   "auth": "$AUTH",
   "id": 1
 }
-EOF
+EOS
 )
 
 curl -s -d "$REQUEST" -H "Content-Type: application/json-rpc" ${ZabbixWeb}api_jsonrpc.php | jq -r '.result[].templateid'

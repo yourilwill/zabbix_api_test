@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ZabbixWeb=http://192.168.33.50/
+ZabbixWeb=http://zabbix05/
+AUTH=`./zabbix_get_token.sh`
 REQEST=$(cat << EOS
   {
     "jsonrpc": "2.0",
@@ -12,7 +13,7 @@ REQEST=$(cat << EOS
         ]
       }
     },
-    "auth": "f6f161169cd80f40a83203e60829f7f5",
+    "auth": "$AUTH",
     "id": 1
   }
 EOS

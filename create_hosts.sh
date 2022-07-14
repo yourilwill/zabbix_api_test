@@ -1,8 +1,7 @@
-####ZabbixWeb画面のURL。環境に合わせて要修正
-ZabbixWeb=http://zabbix05/
+#!/bin/bash
 
-###ZabbixAPIの認証
-AUTH=`bash zabbix_get_token.sh`
+ZabbixWeb=http://zabbix05/
+AUTH=`./zabbix_get_token.sh`
 
 while read LINE
 do
@@ -33,8 +32,6 @@ do
   }
 EOS
 )
-
-  #echo $UPDATE_REQUEST
 
   curl -s -d "$UPDATE_REQUEST" -H "Content-Type: application/json-rpc" ${ZabbixWeb}api_jsonrpc.php
 
