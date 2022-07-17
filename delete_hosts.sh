@@ -6,7 +6,7 @@ TEMPLATE_FILE=host_template.json
 
 ask_execution(){
   while true; do
-    read -p "Do you continue host registeration? (Y/n) " answer
+    read -p "Do you continue host deletion? (Y/n) " answer
 
     case "$answer" in
       [Yy]* ) return 0;;
@@ -23,18 +23,30 @@ while read LINE <&3; do
   echo "Next Host: $HOST_NAME, $IP_ADDRESS"
 
   if ask_execution; then
-    cp -f $TEMPLATE_FILE ./hosts/${HOST_NAME}.json
-    sed -i -e "s/{{ HOSTNAME }}/$HOST_NAME/" ./hosts/${HOST_NAME}.json
-    sed -i -e "s/{{ IP_ADDRESS }}/$IP_ADDRESS/" ./hosts/${HOST_NAME}.json
-    sed -i -e "s/{{ AUTH }}/$AUTH/" ./hosts/${HOST_NAME}.json
-    REQUEST=`<./hosts/${HOST_NAME}.json`
+
+    HOST_ID=`./zabbix_get_hosts.sh $HOST_NAME`
+    REQUEST=$(cat << EOS
+    {
+      "auth": "$AUTH",
+      "method": "host.delete",
+      "id": 3,
+      "params": [
+        "$HOST_ID"
+      ],
+      "jsonrpc": "2.0"
+    }
+EOS
+    )
+
     echo $REQUEST | jq
     curl -s -d "$REQUEST" -H "Content-Type: application/json-rpc" ${ZabbixWeb}api_jsonrpc.php | jq
 
     echo ""
 
   else
+
     exit 0
+
   fi
 
   echo ""

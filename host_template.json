@@ -3,6 +3,7 @@
   "method": "host.create",
   "params": {
     "host": "{{ HOSTNAME }}",
+    "status": 1,
     "interfaces": [
       {
         "type": "1",
@@ -10,12 +11,32 @@
         "useip": "1",
         "ip": "{{ IP_ADDRESS }}",
         "dns": "",
-        "port": "161"
+        "port": "10050"
+      },
+      {
+        "type": "2",
+        "main": "1",
+        "useip": "1",
+        "ip": "{{ IP_ADDRESS }}",
+        "dns": "",
+        "port": "161",
+        "details": {
+          "version": "2",
+          "community": "public"
+        }
       }
     ],
     "groups": [
       {
         "groupid": "19"
+      }
+    ],
+    "templates": [
+      {
+        "templateid": "10050"
+      },
+      {
+        "templateid": "10186"
       }
     ]
   },
