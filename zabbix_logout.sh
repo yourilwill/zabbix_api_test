@@ -1,5 +1,7 @@
+#!/bin/bash
 # $1: auth string got by zabbix_get_token.sh
 
+ZabbixWeb=http://zabbix05/
 REQUEST=$(cat <<EOS
 {
     "jsonrpc": "2.0",

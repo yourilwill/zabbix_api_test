@@ -4,6 +4,7 @@
   "params": {
     "host": "{{ HOSTNAME }}",
     "status": 1,
+    "proxy_hostid": 10566,
     "interfaces": [
       {
         "type": "1",
