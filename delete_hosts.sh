@@ -10,7 +10,9 @@ ask_execution(){
 
     case "$answer" in
       [Yy]* ) return 0;;
-      [Nn]* ) exit 1;;
+      [Nn]* )
+        ./zabbix_logout.sh $AUTH
+        exit 1;;
       * ) echo "Please answer yes or no.";;
     esac
   done
